@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# About: This is tiny script to test CouchDB's disk space usage
+# About: This is a tiny script to test CouchDB's disk space usage
 # depending on the settings.
 # 
 # Copyright (c) 2010 Konrad Förstner <konrad@foerstner.org>
