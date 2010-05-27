@@ -44,6 +44,7 @@ class Benchmark
         doc['a_number'] += 1
         doc
       end
+    @db_sizes << @db.info["disk_size"]
     end
   end
 
