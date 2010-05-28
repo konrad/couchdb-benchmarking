@@ -19,6 +19,7 @@
 
 require 'rubygems'
 require "couchrest"
+require 'httpclient'
 
 class Benchmark
   
@@ -68,7 +69,8 @@ class Benchmark
 
   def compact_db
     puts "Size before compaction: #{@db.info["disk_size"]}"
-    system("curl -X POST http://localhost:5984/#{@db_name}/_compact")
+    client = HTTPClient.new
+    client.post("http://localhost:5984/#{@db_name}/_compact")
     puts "Size after compaction: #{@db.info["disk_size"]}"
     @db_sizes << @db.info["disk_size"]
   end
@@ -79,12 +81,12 @@ puts "Run with the default number of revisions (= 1000)"
 benchmark = Benchmark.new
 benchmark.run_benchmark
 benchmark.compact_db
-benchmark.generate_R_script('CouchDB_Benchmark-default_revs_limit.R')
+#benchmark.generate_R_script('CouchDB_Benchmark-default_revs_limit.R')
 
-puts "---------------------------------"
-puts "Run with number of revisions to 1"
-benchmark = Benchmark.new
-benchmark.change_revision_limit(1)
-benchmark.run_benchmark
-benchmark.compact_db
-benchmark.generate_R_script('CouchDB_Benchmark-revs_limit_1.R')
+# puts "---------------------------------"
+# puts "Run with number of revisions to 1"
+# benchmark = Benchmark.new
+# benchmark.change_revision_limit(1)
+# benchmark.run_benchmark
+# benchmark.compact_db
+# benchmark.generate_R_script('CouchDB_Benchmark-revs_limit_1.R')
